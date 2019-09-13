@@ -1,0 +1,84 @@
+== Spock Framework Testing Cheat Sheet
+
+
+=== Imports & Specification
+
+```java
+import spock.lang.*
+
+class MyFirstSpecification extends Specification {
+  // fields
+  // fixture methods
+  // feature methods
+  // helper methods
+}
+```
+
+
+{blank} +
+
+=== Fixture Methods
+
+```groovy
+def setupSpec() {}    // runs once -  before the first feature method
+def setup() {}        // runs before every feature method
+def cleanup() {}      // runs after every feature method
+def cleanupSpec() {}  // runs once -  after the last feature method
+```
+
+
+{blank} +
+
+=== Feature Methods
+
+```groovy
+def "pushing an element on the stack"() {
+  // blocks go here
+}
+```
+
+
+{blank} +
+
+=== Blocks
+
+```groovy
+```
+
+{blank} +
+
+=== xxxxxxx
+
+```groovy
+```
+
+{blank} +
+
+=== xxxxxxx
+
+```groovy
+```
+
+{blank} +
+
+=== xxxxxxx
+
+```groovy
+```
+
+
+
+{blank} +
+
+=== Annotations
+
+[cols="2,5,5"]
+|===
+|Annotation |Description|Example
+
+|@Shared
+|Sometimes we need to share an object between feature methods.
+|@Shared res = new VeryExpensiveResource()
+|===
+
+
