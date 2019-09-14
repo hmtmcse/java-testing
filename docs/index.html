@@ -460,6 +460,12 @@ body.book #toc,body.book #preamble,body.book h1.sect0,body.book .sect1>h2{page-b
 <li><a href="#_annotations">Annotations</a></li>
 </ul>
 </li>
+<li><a href="#_grails_4_testing_cheat_sheet">Grails 4 Testing Cheat Sheet</a>
+<ul class="sectlevel2">
+<li><a href="#_commands">Commands</a></li>
+<li><a href="#_examples">Examples</a></li>
+</ul>
+</li>
 </ul>
 </div>
 </div>
@@ -779,6 +785,57 @@ be resolved immediately. Second, to replace exception conditions in certain corn
 </li>
 </ol>
 </div>
+<div class="paragraph">
+<p><br></p>
+</div>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="_grails_4_testing_cheat_sheet">Grails 4 Testing Cheat Sheet</h2>
+<div class="sectionbody">
+<div class="sect2">
+<h3 id="_commands">Commands</h3>
+<div class="dlist">
+<dl>
+<dt class="hdlist1">Create Unit Test </dt>
+</dl>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="CodeRay highlight"><code data-lang="bash">grails create-unit-test
+grails create-unit-test book
+grails create-unit-test org.bookstore.Book</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p><br></p>
+</div>
+</div>
+<div class="sect2">
+<h3 id="_examples">Examples</h3>
+<div class="dlist">
+<dl>
+<dt class="hdlist1">Controller </dt>
+</dl>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="CodeRay highlight"><code data-lang="groovy"><span class="keyword">import</span> <span class="include">spock.lang.Specification</span>
+<span class="keyword">import</span> <span class="include">grails.testing.web.controllers.ControllerUnitTest</span>
+
+<span class="type">class</span> <span class="class">HelloControllerTests</span> <span class="directive">extends</span> Specification <span class="directive">implements</span> ControllerUnitTest&lt;HelloController&gt; {
+
+    <span class="type">void</span> <span class="string"><span class="delimiter">&quot;</span><span class="content">Test message action</span><span class="delimiter">&quot;</span></span>() {
+        <span class="key">when</span>:<span class="string"><span class="delimiter">&quot;</span><span class="content">The message action is invoked</span><span class="delimiter">&quot;</span></span>
+        controller.message()
+
+        <span class="key">then</span>:<span class="string"><span class="delimiter">&quot;</span><span class="content">Hello is returned</span><span class="delimiter">&quot;</span></span>
+        response.text == <span class="string"><span class="delimiter">'</span><span class="content">Hello</span><span class="delimiter">'</span></span>
+    }
+}</code></pre>
+</div>
+</div>
 </div>
 </div>
 </div>
@@ -786,7 +843,7 @@ be resolved immediately. Second, to replace exception conditions in certain corn
 <div id="footer">
 <div id="footer-text">
 Version 1.0.0<br>
-Last updated 2019-09-13 09:28:07 +0600
+Last updated 2019-09-14 15:23:27 +0600
 </div>
 </div>
 <style>
