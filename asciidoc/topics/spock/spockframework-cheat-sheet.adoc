@@ -212,37 +212,39 @@ def "maximum of two numbers"() {
 
 === Annotations
 
-[cols="2,5,5"]
+[cols="2,5"]
 |===
-|Annotation |Description|Example
+|Annotation |Description
 
 |@Shared
 |Sometimes we need to share an object between feature methods.
-|@Shared res = new VeryExpensiveResource()
+
+*Example*: +
+@Shared res = new VeryExpensiveResource()
 
 | @Timeout
 | Sets a timeout for execution of a feature or fixture method.
-|
+
 
 | @Ignore
 | Ignores any feature method carrying this annotation.
-|
+
 
 | @IgnoreRest
 | Any feature method carrying this annotation will be executed, all others will be ignored. Useful for quickly running just a single method.
-|
+
 
 | @FailsWith
 | Expects a feature method to complete abruptly. @FailsWith has two use cases: First, to document known bugs that cannot
 be resolved immediately. Second, to replace exception conditions in certain corner cases where the latter cannot be used (like specifying the behavior of exception conditions). In all other cases, exception conditions are preferable.
-|
+
 
 | @Unroll
 | A method annotated with `@Unroll` will have its iterations reported independently
-|
+
 |===
 
-{blank}+
+{blank} +
 
 .*References*
 
