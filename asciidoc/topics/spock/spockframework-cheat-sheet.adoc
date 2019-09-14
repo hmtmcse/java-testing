@@ -3,7 +3,7 @@
 
 === Imports & Specification
 
-```java
+```groovy
 import spock.lang.*
 
 class MyFirstSpecification extends Specification {
