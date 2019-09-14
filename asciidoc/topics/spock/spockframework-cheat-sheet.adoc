@@ -42,30 +42,165 @@ def "pushing an element on the stack"() {
 
 === Blocks
 
+[cols="2,2,5"]
+|===
+|Blocks |Phases |Description
+
+|given:
+|Setup
+a| The given block is where you do any setup work for the feature that you are describing. It may not be preceded by other blocks, and may not be repeated.
+----
+given:
+def stack = new Stack()
+def elem = "push me"
+----
+{blank} +
+
+|when:
+|Stimulus
+.2+a|
+The *when* and *then* blocks always occur together. They describe a stimulus and the expected response. Whereas when blocks
+may contain arbitrary code, then blocks are restricted to conditions, exception conditions, interactions, and variable
+definitions. A feature method may contain multiple pairs of when-then blocks.
+
+[java]
+----
+when:
+stack.push(elem)
+
+then:
+!stack.empty
+stack.size() == 1
+stack.peek() == elem
+----
+
+{blank} +
+
+|then:
+|Response
+
+|expect:
+|Stimulus, Response
+a| An expect block is more limited than a then block in that it may only contain conditions and variable definitions. It
+is useful in situations where it is more natural to describe stimulus and expected response in a single expression.
+[groovy]
+----
+when:
+def x = Math.max(1, 2)
+
+then:
+x == 2
+
+//In same
+expect:
+Math.max(1, 2) == 2
+----
+
+
+|cleanup:
+|Cleanup
+a| A cleanup method, it is used to free any resources used by a feature method, and is run even if (a previous part of)
+the feature method has produced an exception. It may not be repeated.
+
+[groovy]
+----
+given:
+def file = new File("/some/path")
+file.createNewFile()
+
+// ...
+
+cleanup:
+file.delete()
+----
+
+|where:
+|
+a| A where block always comes last in a method, and may not be repeated. It is used to write data-driven feature methods.
+To give you an idea how this is done, have a look at the following example:
+
+[groovy]
+----
+def "computing the maximum of two numbers"() {
+  expect:
+  Math.max(a, b) == c
+
+  where:
+  a << [5, 3]
+  b << [1, 9]
+  c << [5, 9]
+}
+----
+|===
+
+
+
+{blank} +
+
+=== Data Tables
+
 ```groovy
+class MathSpec extends Specification {
+  def "maximum of two numbers"(int a, int b, int c) {
+    expect:
+    Math.max(a, b) == c
+
+    where:
+    a | b | c
+    1 | 3 | 3
+    7 | 4 | 7
+    0 | 0 | 0
+  }
+}
 ```
 
 {blank} +
 
-=== xxxxxxx
+=== Syntactic Variations
 
 ```groovy
+class MathSpec extends Specification {
+  def "maximum of two numbers"() {
+    expect:
+    Math.max(a, b) == c
+
+    where:
+    a | b || c
+    1 | 3 || 3
+    7 | 4 || 7
+    0 | 0 || 0
+  }
+}
 ```
 
 {blank} +
 
-=== xxxxxxx
+=== Data Pipes
 
 ```groovy
+...
+where:
+a << [1, 7, 0]
+b << [3, 4, 0]
+c << [3, 7, 0]
 ```
+
 
 {blank} +
 
-=== xxxxxxx
+=== Multi-Variable Data Pipes
 
 ```groovy
-```
+@Shared sql = Sql.newInstance("jdbc:h2:mem:", "org.h2.Driver")
 
+def "maximum of two numbers"() {
+  expect:
+  Math.max(a, b) == c
+
+  where:
+  [a, b, c] << sql.rows("select a, b, c from maxdata")
+}
+```
 
 
 {blank} +
@@ -79,6 +214,31 @@ def "pushing an element on the stack"() {
 |@Shared
 |Sometimes we need to share an object between feature methods.
 |@Shared res = new VeryExpensiveResource()
+
+| @Timeout
+| Sets a timeout for execution of a feature or fixture method.
+|
+
+| @Ignore
+| Ignores any feature method carrying this annotation.
+|
+
+| @IgnoreRest
+| Any feature method carrying this annotation will be executed, all others will be ignored. Useful for quickly running just a single method.
+|
+
+| @FailsWith
+| Expects a feature method to complete abruptly. @FailsWith has two use cases: First, to document known bugs that cannot
+be resolved immediately. Second, to replace exception conditions in certain corner cases where the latter cannot be used (like specifying the behavior of exception conditions). In all other cases, exception conditions are preferable.
+|
+
+| @Unroll
+| A method annotated with `@Unroll` will have its iterations reported independently
+|
 |===
 
 
+
+.*References*
+
+. http://spockframework.org/spock/docs/1.3/all_in_one.html
