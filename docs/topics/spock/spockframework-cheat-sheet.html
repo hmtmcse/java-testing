@@ -452,6 +452,7 @@ body.book #toc,body.book #preamble,body.book h1.sect0,body.book .sect1>h2{page-b
 <li><a href="#_data_pipes">Data Pipes</a></li>
 <li><a href="#_multi_variable_data_pipes">Multi-Variable Data Pipes</a></li>
 <li><a href="#_annotations">Annotations</a></li>
+<li><a href="#_exception_testing_example">Exception Testing Example</a></li>
 </ul>
 </li>
 </ul>
@@ -765,6 +766,27 @@ be resolved immediately. Second, to replace exception conditions in certain corn
 <div class="paragraph">
 <p><br></p>
 </div>
+</div>
+<div class="sect2">
+<h3 id="_exception_testing_example">Exception Testing Example</h3>
+<div class="paragraph">
+<p>Using the keyword <code>thrown</code></p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="CodeRay highlight"><code data-lang="groovy">    <span class="keyword">def</span> <span class="string"><span class="delimiter">&quot;</span><span class="content">Load YML task from file not exist</span><span class="delimiter">&quot;</span></span>() {
+
+        <span class="key">when</span>: <span class="string"><span class="delimiter">&quot;</span><span class="content">Try to load file</span><span class="delimiter">&quot;</span></span>
+            inputToTask.loadFromYMLFile(ymlFilePath)
+
+        <span class="key">then</span>: <span class="string"><span class="delimiter">&quot;</span><span class="content">Get File not Exist Exception.</span><span class="delimiter">&quot;</span></span>
+            thrown DevOpsException
+    }</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p><br></p>
+</div>
 <div class="olist arabic">
 <div class="title"><strong>References</strong></div>
 <ol class="arabic">
@@ -780,7 +802,7 @@ be resolved immediately. Second, to replace exception conditions in certain corn
 <div id="footer">
 <div id="footer-text">
 Version 1.0.0<br>
-Last updated 2019-09-14 21:47:29 +0600
+Last updated 2019-09-22 08:23:35 +0600
 </div>
 </div>
 <style>
