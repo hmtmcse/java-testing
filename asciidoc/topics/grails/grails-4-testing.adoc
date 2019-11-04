@@ -10,6 +10,17 @@ grails create-unit-test book
 grails create-unit-test org.bookstore.Book
 ```
 
+Run Test ::
+
+```bash
+grails test-app
+grails test-app Foo
+grails test-app Foo Bar
+
+grails test-app -unit
+grails test-app -integration
+```
+
 
 {blank} +
 
