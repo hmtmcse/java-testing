@@ -87,7 +87,7 @@ public class App{
             }
 
             //load the Address class in 'c:\\other_classes\\'
-//            Class  cls = cl.loadClass("com.mkyong.io.Address");
+            Class  cls = cl.loadClass("com.mkyong.io.Address");
 //
 //            //print the location from where this class was loaded
 //            ProtectionDomain pDomain = cls.getProtectionDomain();
