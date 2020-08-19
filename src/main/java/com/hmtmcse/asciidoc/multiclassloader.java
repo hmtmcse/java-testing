@@ -18,7 +18,7 @@ import java.util.Hashtable;
  * @author Jack Harich - 8/18/97
  * @author John D. Mitchell - 99.03.04
  */
-public abstract class MultiClassLoader extends ClassLoader {
+abstract class MultiClassLoader extends ClassLoader {
 
 //---------- Fields --------------------------------------
 private Hashtable classes = new Hashtable();
